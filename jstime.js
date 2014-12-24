@@ -251,7 +251,7 @@ function scanPage ( )
 window.JSTime = {
 	format: formatTime,
 	updateNode: updateNode,
-	scanPage: scanePage
+	scanPage: scanPage
 };
 
 scanPage ( )
