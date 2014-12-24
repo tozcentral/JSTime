@@ -216,7 +216,12 @@ function formatNode ( node, format )
 	if ( !node )
 		return
 		
-	var time = node.getAttribute ( 'datetime' )
+	var time
+	if ( node.nodeName == 'TIME' )
+		time = node.getAttribute ( 'datetime' )
+	else
+		time = node.getAttribute ( 'data-datetime' )
+		
 	if ( time )
 		node.innerHTML = formatTime ( format, new Date ( time ) )
 	else
@@ -245,7 +250,8 @@ function scanPage ( )
 
 window.JSTime = {
 	format: formatTime,
-	updateNode: updateNode
+	updateNode: updateNode,
+	scanPage: scanePage
 };
 
 scanPage ( )
