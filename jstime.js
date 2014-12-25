@@ -10,14 +10,16 @@ var daysToMonth = [0, 31, 31+28, 31+28+31, 31+28+31+30, 31+28+31+30+31, 31+28+31
 var suffix = ['st', 'nd', 'rd']
 
 // http://stackoverflow.com/questions/11887934/check-if-daylight-saving-time-is-in-effect-and-if-it-is-for-how-many-hours
-Date.prototype.stdTimezoneOffset = function() {
-    var jan = new Date(this.getFullYear(), 0, 1);
-    var jul = new Date(this.getFullYear(), 6, 1);
+function getStandardTimezoneOffset ( date )
+{
+    var jan = new Date(date.getFullYear(), 0, 1);
+    var jul = new Date(date.getFullYear(), 6, 1);
     return Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
 }
 
-Date.prototype.dst = function() {
-    return this.getTimezoneOffset() < this.stdTimezoneOffset();
+function isDST ( date )
+{
+    return date.getTimezoneOffset() < getStandardTimezoneOffset(date);
 }
 
 function toDigits ( number, digits, prefix )
@@ -151,7 +153,7 @@ function formatArgument ( time, type )
 			throw new Error ( 'Not Implemented: e' )
 		break
 		case 'I': // Whether or not the date is in daylight saving time 		1 if Daylight Saving Time, 0 otherwise.
-			return time.dst ( ) ? 1 : 0
+			return isDST ( time ) ? 1 : 0
 		break
 		case 'O': // Difference to Greenwich time (GMT) in hours 				Example: +0200
 			var hours = parseInt ( time.getTimezoneOffset() / 60 )
