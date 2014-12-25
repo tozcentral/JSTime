@@ -156,12 +156,12 @@ function formatArgument ( time, type )
 		case 'O': // Difference to Greenwich time (GMT) in hours 				Example: +0200
 			var hours = time.getTimezoneOffset() / 60
 			var minutes = time.getTimezoneOffset() % 60
-			return [(hours < 0 ? '+' : '-'), toDigits ( Math.abs(hours), 2 ), toDigits ( Math.abs(minutes), 2 )].join('')
+			return [(hours > 0 ? '-' : '+'), toDigits ( Math.abs(hours), 2 ), toDigits ( Math.abs(minutes), 2 )].join('')
 		break
 		case 'P': // Difference to Greenwich time (GMT) with colon between hours and minutes 	Example: +02:00
 			var hours = time.getTimezoneOffset() / 60
 			var minutes = time.getTimezoneOffset() % 60
-			return [(hours < 0 ? '+' : '-'), toDigits ( Math.abs(hours), 2 ), ':', toDigits ( Math.abs(minutes), 2 )].join('')
+			return [(hours > 0 ? '-' : '+'), toDigits ( Math.abs(hours), 2 ), ':', toDigits ( Math.abs(minutes), 2 )].join('')
 		break
 		case 'T': // Timezone abbreviation 	Examples: EST, MDT ...
 			throw new Error ( 'Not Implemented: T' )
