@@ -173,13 +173,13 @@ function formatArgument ( time, type )
 		break
 
 		// Full Date/Time
-		case 'c': // ISO 8601 date (added in PHP 5) 	2004-02-12T15:19:21+00:00
-			return tme.toISOString()
+		case 'c': // ISO 8601 date 					 							2004-02-12T15:19:21+00:00
+			return formatTime ( 'Y-m-d\\TH:i:sP', time )
 		break
-		case 'r': // RFC 2822 formatted date 	Example: Thu, 21 Dec 2000 16:01:07 +0200
-			throw new Error ( 'Not Implemented: r' )
+		case 'r': // RFC 2822 formatted date 									Example: Thu, 21 Dec 2000 16:01:07 +0200
+			return formatTime ( 'D, d M Y H:i:s: O', time )
 		break
-		case 'U': // Seconds since the Unix Epoch (January 1 1970 00:00:00 GMT) 	See also time()
+		case 'U': // Seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)
 			return time.getTime()
 		break
 
