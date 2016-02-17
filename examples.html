@@ -5,7 +5,7 @@
 	<title>Test</title>
 </head>
 <body>
-<pre>
+<pre id="pre">
 	NOW:                           <time data-format="c">Test</time>
 	NOW:                           <time data-format="r">Test</time>
 	NOW:                           <time data-format="U">Test</time>
@@ -26,6 +26,22 @@
 	
 	2014-12-01T16:00:30.830+10:00: <time datetime="2014-12-01T16:00:30.830+10:00" data-format="\a:a \A:A  \B:\B \g:g \G:G \h:h \H:H \i:i \s:s \u:\u \e:\e \I:I \O:O \P:P \T:\T \Z:\Z">Test</time>
 </pre>
+<input type="datetime-local" id="datetime"> <input type="text" id="format" placeholder="Format"> <input type="button" id="button" value="Add"> <a target="_blank" href="http://php.net/manual/en/function.date.php">Format doc</a>
 	<script src="jstime.js"></script>
+	<script>
+		JSTime.enableObserver ( );
+		document.getElementById ( 'button' ).onclick = function ( )
+		{
+			var pre = document.getElementById ( 'pre' );
+			var datetime = document.getElementById ( 'datetime' ).value;
+			var format = document.getElementById ( 'format' ).value;
+			
+			var time = document.createElement ( 'time' );
+			time.setAttribute ( 'datetime', datetime );
+			time.setAttribute ( 'data-format', format );
+			pre.appendChild ( time );
+			pre.appendChild ( document.createTextNode ( '\n' ) );
+		}
+	</script>
 </body>
 </html>
